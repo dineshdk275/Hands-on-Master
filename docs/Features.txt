@@ -1,0 +1,42 @@
+Feautures 
+
+🔹 Landing Page
+Clean and minimal design
+
+Short intro about the platform
+
+"Sign Up" button on the top-right corner
+
+🔹 User Authentication
+Sign Up form with fields: name, email, password
+
+Option to choose initial skill track (e.g., Python Basics)
+
+Redirect to Dashboard after successful registration
+
+🔹 Dashboard Layout
+Split into two sections:
+
+📌 Left Sidebar Navigation
+Dashboard
+
+My Skills
+
+Hands-on Tasks
+
+Leaderboard
+
+Profile
+
+Logout
+
+📌 Main Content Area
+Display total points earned
+
+Show recommended projects list
+
+Visual tracker for current skill progress
+
+List of completed projects
+
+Detailed progress of selected skill track
