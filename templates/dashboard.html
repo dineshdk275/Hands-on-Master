@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hands On Master - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease-in-out',
+            'slide-up': 'slideUp 0.8s ease-out',
+            'scale-in': 'scaleIn 0.5s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+            'progress': 'progress 2s ease-out',
+            'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
+            'shimmer': 'shimmer 2s ease-in-out infinite',
+            'rotate-slow': 'rotateSlow 20s linear infinite',
+            'gradient-x': 'gradientX 3s ease infinite',
+            'slide-in-right': 'slideInRight 0.6s ease-out',
+            'wiggle': 'wiggle 1s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            scaleIn: {
+              '0%': { opacity: '0', transform: 'scale(0.95)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-5px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 5px rgba(59, 130, 246, 0.5)' },
+              '50%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.8)' },
+            },
+            progress: {
+              '0%': { width: '0%' },
+            },
+            bounceGentle: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            },
+            rotateSlow: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+            gradientX: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+            },
+            slideInRight: {
+              '0%': { opacity: '0', transform: 'translateX(100px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' },
+            }
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+            'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+            'shimmer': 'linear-gradient(110deg, transparent 40%, rgba(255,255,255,0.5) 50%, transparent 60%)',
+          },
+          backdropBlur: {
+            xs: '2px',
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 text-gray-800 dark:text-white min-h-screen">
+  <!-- Enhanced Background Pattern -->
+  <div class="fixed inset-0 opacity-[0.15] dark:opacity-[0.05]">
+    <div class="absolute inset-0 bg-gradient-conic from-blue-400 via-purple-400 via-pink-400 to-cyan-400 animate-rotate-slow"></div>
+  </div>
+  
+  <!-- Light Mode Additional Background Elements -->
+  <div class="fixed inset-0 pointer-events-none opacity-30 dark:opacity-0">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-blue-200/40 to-transparent rounded-full blur-3xl"></div>
+    <div class="absolute top-20 right-0 w-80 h-80 bg-gradient-radial from-purple-200/40 to-transparent rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-radial from-pink-200/40 to-transparent rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-20 w-64 h-64 bg-gradient-radial from-cyan-200/40 to-transparent rounded-full blur-2xl"></div>
+  </div>
+  
+  <!-- Sidebar -->
+  <div class="flex relative z-10">
+    <aside id="sidebar" class="w-16 hover:w-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl h-screen transition-all duration-300 ease-in-out overflow-hidden group border-r border-gray-200/50 dark:border-gray-700/50 shadow-2xl">
+      <!-- Logo/Brand Section -->
+      <div class="p-3 border-b border-gray-100/50 dark:border-gray-700/50">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-tr from-indigo-500 via-blue-500 to-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg">
+            <span class="text-white text-lg font-bold">H</span>
+          </div>
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-bold text-gray-800 dark:text-white whitespace-nowrap overflow-hidden">
+            <span class="bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent">Hands On Master</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Section with Notifications -->
+      <div class="p-3 border-b border-gray-100/50 dark:border-gray-700/50">
+        <div class="flex items-center gap-3">
+          <button id="notifBtn" class="relative w-10 h-10 hover:bg-gradient-to-r hover:from-amber-50 hover:to-red-50 dark:hover:bg-gradient-to-r dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 flex items-center justify-center group/btn flex-shrink-0 hover:scale-110 hover:shadow-lg">
+            <span class="text-lg">🔔</span>
+            <span class="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[18px] text-center font-medium shadow-lg">3</span>
+          </button>
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm text-gray-700 dark:text-gray-300 font-medium whitespace-nowrap overflow-hidden">
+            <span>Notifications</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="flex-1 py-4 px-2">
+        <div class="space-y-1">
+          <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/50 dark:to-blue-900/50 text-indigo-700 dark:text-indigo-300 font-medium whitespace-nowrap group/item hover:scale-105 shadow-lg border border-indigo-200/50 dark:border-indigo-700/50">
+            <span class="text-lg flex-shrink-0">🏠</span>
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">Dashboard</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-emerald-50 hover:to-teal-50 dark:hover:from-gray-700/50 dark:hover:to-gray-600/50 text-gray-700 dark:text-gray-300 whitespace-nowrap group/item hover:scale-105 hover:shadow-lg">
+            <span class="text-lg flex-shrink-0">🛤️</span>
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">Learning Path</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-amber-50 hover:to-yellow-50 dark:hover:from-gray-700/50 dark:hover:to-gray-600/50 text-gray-700 dark:text-gray-300 whitespace-nowrap group/item hover:scale-105 hover:shadow-lg">
+            <span class="text-lg flex-shrink-0">🏆</span>
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">Challenges</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-violet-50 hover:to-fuchsia-50 dark:hover:from-gray-700/50 dark:hover:to-gray-600/50 text-gray-700 dark:text-gray-300 whitespace-nowrap group/item hover:scale-105 hover:shadow-lg">
+            <span class="text-lg flex-shrink-0">🤖</span>
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">AI Tutor</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-cyan-50 hover:to-sky-50 dark:hover:from-gray-700/50 dark:hover:to-gray-600/50 text-gray-700 dark:text-gray-300 whitespace-nowrap group/item hover:scale-105 hover:shadow-lg">
+            <span class="text-lg flex-shrink-0">📊</span>
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm">Leader Board</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Bottom Section -->
+      <div class="border-t border-gray-100/50 dark:border-gray-700/50 p-3 space-y-3">
+        <!-- Theme Toggle -->
+        <div class="flex items-center gap-3 group/theme">
+          <button id="themeToggle" class="w-10 h-10 hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-300 flex items-center justify-center group/btn flex-shrink-0 hover:scale-110 hover:shadow-lg">
+            <span class="text-lg">🌓</span>
+          </button>
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs text-gray-600 dark:text-gray-400 font-medium whitespace-nowrap overflow-hidden">
+            <span class="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Dark Mode</span>
+          </div>
+        </div>
+        
+        <!-- Profile Section -->
+        <div class="flex items-center gap-3 group/profile relative">
+          <button id="profileBtn" class="w-10 h-10 hover:bg-gradient-to-r hover:from-violet-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-300 flex items-center justify-center group/btn flex-shrink-0 hover:scale-110 hover:shadow-lg">
+            <div class="w-10 h-10 bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+              <span class="text-white text-sm font-medium">D</span>
+            </div>
+          </button>
+          <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs text-gray-600 dark:text-gray-400 font-medium whitespace-nowrap overflow-hidden">
+            <span class="bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">Profile</span>
+          </div>
+          <div id="profileMenu" class="hidden absolute bottom-full left-0 mb-2 w-48 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl shadow-2xl rounded-xl border border-gray-200/50 dark:border-gray-600/50 overflow-hidden z-50 animate-scale-in">
+            <div class="px-4 py-3 border-b border-gray-100/50 dark:border-gray-700/50 bg-gradient-to-r from-blue-50/30 to-purple-50/30 dark:from-blue-900/20 dark:to-purple-900/20">
+              <div class="text-sm font-semibold text-gray-900 dark:text-white">Dinesh Kumar</div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">dinesh@example.com</div>
+            </div>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 dark:hover:from-gray-700/50 dark:hover:to-gray-600/50 transition-all duration-200 hover:scale-[1.02] group">
+              <span class="text-gray-400">👤</span>
+              <span class="text-sm">Account</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 dark:hover:from-gray-700/50 dark:hover:to-gray-600/50 transition-all duration-200 hover:scale-[1.02] group">
+              <span class="text-gray-400">⚙️</span>
+              <span class="text-sm">Settings</span>
+            </a>
+            <hr class="border-gray-100/50 dark:border-gray-700/50">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-gradient-to-r hover:from-red-50/50 hover:to-pink-50/50 dark:hover:from-red-900/20 dark:hover:to-pink-900/20 transition-all duration-200 text-red-600 dark:text-red-400 hover:scale-[1.02] group">
+              <span>🚪</span>
+              <span class="text-sm">Sign Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 space-y-8 relative">
+      <!-- Floating particles effect -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-10 left-10 w-2 h-2 bg-blue-400 rounded-full animate-float opacity-20"></div>
+        <div class="absolute top-32 right-20 w-1 h-1 bg-purple-400 rounded-full animate-bounce-gentle opacity-30" style="animation-delay: 1s"></div>
+        <div class="absolute bottom-20 left-1/4 w-1.5 h-1.5 bg-pink-400 rounded-full animate-float opacity-25" style="animation-delay: 2s"></div>
+        <div class="absolute top-1/2 right-10 w-1 h-1 bg-indigo-400 rounded-full animate-bounce-gentle opacity-20" style="animation-delay: 0.5s"></div>
+      </div>
+
+      <section class="animate-fade-in relative">
+        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-600 p-6 shadow-2xl hover:animate-gradient-x transition-all duration-300 group/welcome">
+          <div class="absolute inset-0 bg-shimmer bg-[length:200%_100%] group-hover/welcome:animate-shimmer"></div>
+          <div class="relative z-10">
+            <h1 class="text-2xl font-bold animate-slide-up">
+              <span class="text-white drop-shadow-lg">Welcome back, Dinesh!</span>
+              <span class="text-2xl inline-block ml-2 group-hover/welcome:animate-wiggle">👋</span>
+            </h1>
+            <p class="text-blue-100 italic mt-2 text-base animate-slide-up font-medium" style="animation-delay: 0.2s">"Every day is a chance to learn something new."</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Highlights Section -->
+      <section class="grid md:grid-cols-3 gap-8">
+        <div class="relative overflow-hidden bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] animate-scale-in border border-white/20 dark:border-gray-700/20 group">
+          <div class="absolute inset-0 bg-gradient-to-br from-sky-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">🏅 Points</h2>
+                <p class="text-2xl font-black bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent group-hover:animate-pulse">1250</p>
+              </div>
+              <div class="w-12 h-12 bg-gradient-to-br from-sky-500 via-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center shadow-xl">
+                <span class="text-white text-lg">🏅</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative overflow-hidden bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] animate-scale-in border border-white/20 dark:border-gray-700/20 group" style="animation-delay: 0.1s">
+          <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">📈 Rank</h2>
+                <p class="text-2xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent group-hover:animate-pulse">#12</p>
+              </div>
+              <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-xl">
+                <span class="text-white text-lg">📈</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative overflow-hidden bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] animate-scale-in border border-white/20 dark:border-gray-700/20 group/skills" style="animation-delay: 0.2s">
+          <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 opacity-0 group-hover/skills:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <h2 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-4">📚 Enrolled Skills</h2>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-bold text-gray-600 dark:text-gray-400">HTML</span>
+                  <span class="text-sm font-black bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">80%</span>
+                </div>
+                <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 rounded-full h-3 overflow-hidden backdrop-blur-sm">
+                  <div class="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 h-3 rounded-full shadow-lg relative transition-all duration-1000 ease-out group-hover/skills:w-[80%] w-0">
+                    <div class="absolute inset-0 bg-shimmer bg-[length:200%_100%] group-hover/skills:animate-shimmer"></div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-bold text-gray-600 dark:text-gray-400">CSS</span>
+                  <span class="text-sm font-black bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">60%</span>
+                </div>
+                <div class="w-full bg-gray-200/50 dark:bg-gray-700/50 rounded-full h-3 overflow-hidden backdrop-blur-sm">
+                  <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 h-3 rounded-full shadow-lg relative transition-all duration-1000 ease-out group-hover/skills:w-[60%] w-0 delay-200">
+                    <div class="absolute inset-0 bg-shimmer bg-[length:200%_100%] group-hover/skills:animate-shimmer"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Current Project -->
+      <section class="relative overflow-hidden bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 animate-slide-up border border-white/20 dark:border-gray-700/20 group/project" style="animation-delay: 0.3s">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/8 to-cyan-500/8 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600 rounded-2xl flex items-center justify-center shadow-xl">
+              <span class="text-white text-lg">🔧</span>
+            </div>
+            <h2 class="text-xl font-black bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">Currently Working On</h2>
+          </div>
+          <div class="bg-gradient-to-r from-slate-50/90 to-gray-50/90 dark:from-slate-800/40 dark:to-gray-800/40 p-4 rounded-xl border-l-4 border-blue-500 backdrop-blur-sm shadow-inner">
+            <p class="text-gray-700 dark:text-gray-300 font-bold text-base mb-3">Building a Skill Tracker with Flask & Tailwind</p>
+            <div class="flex items-center gap-3">
+              <div class="flex-1 bg-gray-200/60 dark:bg-gray-600/60 rounded-full h-3 overflow-hidden backdrop-blur-sm shadow-inner">
+                <div class="bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 h-3 rounded-full shadow-lg relative transition-all duration-1000 ease-out group-hover/project:w-[75%] w-0">
+                  <div class="absolute inset-0 bg-gradient-to-r from-emerald-400/30 to-teal-400/30 animate-pulse"></div>
+                  <div class="absolute inset-0 bg-shimmer bg-[length:200%_100%] group-hover/project:animate-shimmer"></div>
+                </div>
+              </div>
+              <span class="text-sm font-black bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">75%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommended Projects -->
+      <section class="relative overflow-hidden bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 animate-slide-up border border-white/20 dark:border-gray-700/20" style="animation-delay: 0.4s">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/8 to-violet-500/8 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-600 via-violet-600 to-fuchsia-600 rounded-2xl flex items-center justify-center shadow-xl">
+              <span class="text-white text-lg">📌</span>
+            </div>
+            <h2 class="text-xl font-black bg-gradient-to-r from-purple-700 to-violet-700 bg-clip-text text-transparent">Recommended Projects</h2>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-white/50 to-slate-50/50 dark:from-gray-700/30 dark:to-gray-600/30 hover:from-blue-50/70 hover:to-cyan-50/70 dark:hover:from-blue-900/20 dark:hover:to-cyan-900/20 transition-all duration-300 hover:scale-[1.02] cursor-pointer border border-slate-200/40 hover:border-blue-300/60 dark:border-gray-600/40 dark:hover:border-blue-500/40 backdrop-blur-sm group shadow-sm hover:shadow-md">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <span class="text-white text-lg">🤖</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-gray-800 dark:text-gray-200 font-bold text-base block">AI-Powered Resume Builder</span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Machine Learning & Web Development</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-white/50 to-slate-50/50 dark:from-gray-700/30 dark:to-gray-600/30 hover:from-orange-50/70 hover:to-amber-50/70 dark:hover:from-orange-900/20 dark:hover:to-amber-900/20 transition-all duration-300 hover:scale-[1.02] cursor-pointer border border-slate-200/40 hover:border-orange-300/60 dark:border-gray-600/40 dark:hover:border-orange-500/40 backdrop-blur-sm group shadow-sm hover:shadow-md">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <span class="text-white text-lg">🏆</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-gray-800 dark:text-gray-200 font-bold text-base block">Leaderboard-based Quiz App</span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Interactive Learning Platform</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-white/50 to-slate-50/50 dark:from-gray-700/30 dark:to-gray-600/30 hover:from-emerald-50/70 hover:to-teal-50/70 dark:hover:from-emerald-900/20 dark:hover:to-teal-900/20 transition-all duration-300 hover:scale-[1.02] cursor-pointer border border-slate-200/40 hover:border-emerald-300/60 dark:border-gray-600/40 dark:hover:border-emerald-500/40 backdrop-blur-sm group shadow-sm hover:shadow-md">
+              <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <span class="text-white text-lg">📊</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-gray-800 dark:text-gray-200 font-bold text-base block">Full-stack Skill Progress Tracker</span>
+                <span class="text-gray-500 dark:text-gray-400 text-sm">Data Visualization & Analytics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Profile menu toggle
+    document.getElementById('profileBtn').addEventListener('click', () => {
+      document.getElementById('profileMenu').classList.toggle('hidden');
+    });
+
+    // Theme toggle
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // Close profile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const profileBtn = document.getElementById('profileBtn');
+      const profileMenu = document.getElementById('profileMenu');
+      
+      if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
+        profileMenu.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

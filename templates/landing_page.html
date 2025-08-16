@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hands On Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      --bg-secondary: #1e1e2f;
+      --bg-tertiary: #151521;
+      --text-primary: #ffffff;
+      --text-secondary: #d1d5db;
+      --accent: #8b5cf6;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+      --bg-secondary: #f1f5f9;
+      --bg-tertiary: #e2e8f0;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+    }
+
+    [data-theme="light"] body {
+      background: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+    }
+
+    [data-theme="light"] .gradient-text {
+      background: linear-gradient(45deg, #5b21b6, #9d174d, #0c4a6e) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      /* Fallback color for browsers that don't support gradient text */
+      color: #5b21b6 !important;
+    }
+
+    /* Special styling for numbered circles in How It Works section */
+    [data-theme="light"] #how-it-works .glassmorphism {
+      background: rgba(255, 255, 255, 0.95) !important;
+      border: 2px solid rgba(139, 92, 246, 0.3) !important;
+      box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15) !important;
+      backdrop-filter: blur(10px) !important;
+    }
+
+    [data-theme="light"] #how-it-works .gradient-text {
+      background: linear-gradient(45deg, #4c1d95, #831843, #0c4a6e) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      font-weight: 900 !important;
+      /* Extra dark fallback for the numbers */
+      color: #4c1d95 !important;
+    }
+
+    [data-theme="light"] .glassmorphism {
+      background: rgba(255, 255, 255, 0.85) !important;
+      border: 1px solid rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    [data-theme="light"] .glassmorphism:hover {
+      background: rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    [data-theme="light"] .floating-bg {
+      background: rgba(139, 92, 246, 0.25) !important;
+      border: 2px solid rgba(139, 92, 246, 0.4) !important;
+    }
+
+    [data-theme="light"] .carousel-arrow {
+      background: rgba(139, 92, 246, 0.9) !important;
+      border: 1px solid rgba(139, 92, 246, 0.3) !important;
+    }
+
+    [data-theme="light"] .carousel-arrow:hover {
+      background: rgba(139, 92, 246, 1) !important;
+      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3) !important;
+    }
+
+    * {
+      transition: all 0.3s ease;
+    }
+
+    .glassmorphism {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .glassmorphism:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+    }
+
+    [data-theme="light"] .glassmorphism:hover {
+      background: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #8b5cf6, #ec4899, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .floating-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.7); }
+      50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.9); }
+    }
+
+    .pulse-glow {
+      animation: pulse-glow 2s infinite;
+    }
+
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal-up.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #8b5cf6, #ec4899);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    #testimonials-carousel {
+      transition: transform 1000ms ease;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(139, 92, 246, 0.8);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(139, 92, 246, 1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-arrow.left {
+      left: -25px;
+    }
+
+    .carousel-arrow.right {
+      right: -25px;
+    }
+
+    .testimonial-dot {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .testimonial-card {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 768px) {
+      .testimonial-card {
+        min-height: 280px;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body style="background: var(--bg-primary); color: var(--text-primary);">
+
+  <!-- Glassmorphism Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 glassmorphism">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg mr-3 flex items-center justify-center">
+            <span class="text-white font-bold text-sm">HM</span>
+          </div>
+          <h1 class="text-xl font-bold gradient-text">Hands On Master</h1>
+        </div>
+        
+        <!-- Navigation Links -->
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-8">
+            <a href="#features" class="nav-link hover:text-purple-400 transition-colors duration-300 font-medium">Features</a>
+            <a href="#how-it-works" class="nav-link hover:text-purple-400 transition-colors duration-300 font-medium">How it Works</a>
+            <a href="#get-started" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-all duration-300 font-medium pulse-glow">Get Started</a>
+          </div>
+        </div>
+
+        <!-- Theme Toggle & Mobile Menu -->
+        <div class="flex items-center space-x-4">
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" class="p-2 rounded-lg hover:bg-white/10 transition-all duration-300 hover:scale-110">
+            <svg id="sun-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+            </svg>
+            <svg id="moon-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+          </button>
+
+          <!-- Mobile menu button -->
+          <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-300">
+            <svg id="menu-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <svg id="menu-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="md:hidden hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-white/20">
+          <a href="#features" class="block px-3 py-2 hover:bg-white/10 rounded-md transition-colors duration-300">Features</a>
+          <a href="#how-it-works" class="block px-3 py-2 hover:bg-white/10 rounded-md transition-colors duration-300">How it Works</a>
+          <a href="#get-started" class="block px-3 py-2 bg-purple-600 hover:bg-purple-700 rounded-md transition-colors duration-300">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Quote -->
+  <section class="min-h-screen flex items-center justify-center text-center px-4 relative pt-20">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl floating-animation"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl floating-animation" style="animation-delay: -3s;"></div>
+      <div class="absolute top-1/2 left-1/2 w-60 h-60 bg-pink-500/10 rounded-full blur-2xl floating-animation" style="animation-delay: -5s;"></div>
+    </div>
+    
+    <div class="z-10 max-w-5xl">
+      <!-- Inspiring Quote -->
+      <div class="mb-8 p-6 glassmorphism rounded-2xl max-w-2xl mx-auto reveal-up">
+        <blockquote class="text-xl md:text-2xl font-medium italic mb-4" style="color: var(--text-secondary);">
+          "Tell me and I forget, teach me and I may remember, involve me and I learn."
+        </blockquote>
+        <cite class="text-purple-400 font-semibold">— Benjamin Franklin</cite>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 reveal-up">
+        <span class="gradient-text" id="typing-line1">Learn by Doing</span><br>
+        <span class="gradient-text" id="typing-line2">with Hands On Master</span>
+      </h1>
+      
+      <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto reveal-up" style="color: var(--text-secondary);">
+        Transform theory into practice. Build real-world projects, get AI-powered feedback, and accelerate your learning journey through hands-on coding experience.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12 reveal-up">
+        <a href="#features" class="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-purple-500/25 hover:scale-105 pulse-glow">
+          🚀 Explore Features
+        </a>
+        <a href="#get-started" class="glassmorphism hover:bg-white/20 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105">
+          ✨ Start Free
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-8 max-w-md mx-auto reveal-up">
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold gradient-text">1000+</div>
+          <div class="text-sm" style="color: var(--text-secondary);">Projects Built</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold gradient-text">50+</div>
+          <div class="text-sm" style="color: var(--text-secondary);">Learning Tracks</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold gradient-text">24/7</div>
+          <div class="text-sm" style="color: var(--text-secondary);">AI Feedback</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 px-6 theme-transition reveal-up" style="background: var(--bg-secondary);">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Why Choose <span class="gradient-text">Hands On Master?</span></h2>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
+        We believe in learning through practice. Here's what makes our platform unique.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+      <div class="glassmorphism rounded-2xl p-8 card-hover reveal-up">
+        <div class="text-4xl mb-4">🎯</div>
+        <h3 class="text-xl font-semibold mb-3">Interactive Projects</h3>
+        <p style="color: var(--text-secondary);">Build real applications step-by-step. From simple scripts to complex web apps - learn by actually creating.</p>
+      </div>
+      
+      <div class="glassmorphism rounded-2xl p-8 card-hover reveal-up">
+        <div class="text-4xl mb-4">🤖</div>
+        <h3 class="text-xl font-semibold mb-3">AI-Powered Feedback</h3>
+        <p style="color: var(--text-secondary);">Get instant, personalized feedback on your code. Learn best practices and fix bugs with AI guidance.</p>
+      </div>
+      
+      <div class="glassmorphism rounded-2xl p-8 card-hover reveal-up">
+        <div class="text-4xl mb-4">💻</div>
+        <h3 class="text-xl font-semibold mb-3">Learn by Doing</h3>
+        <p style="color: var(--text-secondary);">No boring lectures. Jump straight into coding and build your skills through practical experience.</p>
+      </div>
+      
+      <div class="glassmorphism rounded-2xl p-8 card-hover reveal-up">
+        <div class="text-4xl mb-4">🏆</div>
+        <h3 class="text-xl font-semibold mb-3">Track Progress</h3>
+        <p style="color: var(--text-secondary);">Watch your skills grow with every project. Earn badges and certificates as you master new technologies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-20 px-6 theme-transition reveal-up" style="background: var(--bg-tertiary);">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">How It <span class="gradient-text">Works</span></h2>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
+        Start coding today! Your hands-on learning journey in 4 simple steps.
+      </p>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="text-center reveal-up">
+          <div class="relative mb-6">
+            <div class="w-20 h-20 mx-auto glassmorphism rounded-full flex items-center justify-center text-2xl font-bold gradient-text">
+              1
+            </div>
+            <div class="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 bg-purple-500/10 rounded-full -z-10 floating-animation floating-bg"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Pick a Project</h3>
+          <p style="color: var(--text-secondary);">Choose from hundreds of hands-on projects across web dev, mobile, data science, and more.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center reveal-up">
+          <div class="relative mb-6">
+            <div class="w-20 h-20 mx-auto glassmorphism rounded-full flex items-center justify-center text-2xl font-bold gradient-text">
+              2
+            </div>
+            <div class="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 bg-blue-500/10 rounded-full -z-10 floating-animation floating-bg" style="animation-delay: -1s;"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Start Coding</h3>
+          <p style="color: var(--text-secondary);">Jump into our interactive coding environment and start building immediately with guided tutorials.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center reveal-up">
+          <div class="relative mb-6">
+            <div class="w-20 h-20 mx-auto glassmorphism rounded-full flex items-center justify-center text-2xl font-bold gradient-text">
+              3
+            </div>
+            <div class="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 bg-pink-500/10 rounded-full -z-10 floating-animation floating-bg" style="animation-delay: -2s;"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Get AI Help</h3>
+          <p style="color: var(--text-secondary);">Stuck? Our AI mentor provides instant feedback, debugging help, and coding suggestions.</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="text-center reveal-up">
+          <div class="relative mb-6">
+            <div class="w-20 h-20 mx-auto glassmorphism rounded-full flex items-center justify-center text-2xl font-bold gradient-text">
+              4
+            </div>
+            <div class="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 bg-green-500/10 rounded-full -z-10 floating-animation floating-bg" style="animation-delay: -3s;"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Build & Learn</h3>
+          <p style="color: var(--text-secondary);">Complete projects, earn certificates, and build a portfolio that showcases your skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 px-6 theme-transition reveal-up" style="background: var(--bg-secondary);">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Learning <span class="gradient-text">Success Stories</span></h2>
+      <p class="text-lg max-w-2xl mx-auto" style="color: var(--text-secondary);">
+        See how our hands-on approach helped learners master coding through real projects.
+      </p>
+    </div>
+    
+    <!-- Auto-scrolling Testimonials Carousel -->
+    <div class="max-w-7xl mx-auto overflow-hidden relative">
+      <div id="testimonials-carousel" class="flex transition-transform duration-1000 ease-in-out">
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold mr-4">R</div>
+              <div>
+                <h4 class="font-bold">Riya M.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Computer Science Student</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"Finally, a platform that lets me learn by actually building things! The projects are engaging and the AI feedback helped me understand concepts I struggled with in class."</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold mr-4">Y</div>
+              <div>
+                <h4 class="font-bold">Yash T.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Self-Learning Enthusiast</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"The hands-on approach is amazing! 🔥 I built 10+ projects and learned more in 3 months than I did in a year of watching tutorials."</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold mr-4">N</div>
+              <div>
+                <h4 class="font-bold">Neha S.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Coding Bootcamp Graduate</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"Perfect complement to my bootcamp! The practical projects helped me understand concepts better and build a solid portfolio of real applications."</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold mr-4">A</div>
+              <div>
+                <h4 class="font-bold">Amit K.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Working Professional</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"As someone switching careers, this platform gave me the confidence to code. The step-by-step projects and instant feedback made learning enjoyable and effective!"</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">P</div>
+              <div>
+                <h4 class="font-bold">Priya D.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Frontend Developer</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"The AI mentor is like having a coding buddy 24/7! It helped me debug complex issues and learn React patterns I never understood before. Absolutely game-changing!"</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-teal-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold mr-4">S</div>
+              <div>
+                <h4 class="font-bold">Saurabh V.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Data Science Student</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"From zero Python knowledge to building ML models in 2 months! The project-based learning approach made complex algorithms click. Best investment in my education!"</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 7 -->
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white font-bold mr-4">M</div>
+              <div>
+                <h4 class="font-bold">Maya J.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Mobile App Developer</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"Built my first mobile app here! The Flutter projects were so well structured. Now I freelance and create apps for local businesses. Thank you Hands On Master! 🚀"</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 8 -->
+        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">D</div>
+              <div>
+                <h4 class="font-bold">Dev R.</h4>
+                <p class="text-sm" style="color: var(--text-secondary);">Full Stack Developer</p>
+              </div>
+            </div>
+            <p style="color: var(--text-secondary);" class="mb-4">"The full-stack projects here are incredible! Built a complete e-commerce site from scratch. The learning curve was smooth and the end result was portfolio-worthy."</p>
+            <div class="flex text-yellow-400">⭐⭐⭐⭐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Started / Call To Action -->
+  <section id="get-started" class="py-20 theme-transition relative overflow-hidden reveal-up" style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #06b6d4 100%);">
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl floating-animation"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl floating-animation" style="animation-delay: -2s;"></div>
+    </div>
+    
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white">Ready to Start Learning?</h2>
+      <p class="text-lg md:text-xl mb-12 text-white/90 max-w-2xl mx-auto">
+        Join thousands of learners building real projects and mastering coding through hands-on experience. Your coding adventure starts here.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12">
+        <a href="{{ url_for('login') }}" class="bg-white text-purple-900 font-semibold px-10 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-2xl">
+          🚀 Start Building Now - Free
+        </a>
+       
+      </div>
+
+      <!-- Trust indicators -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-white/80 text-sm">
+        <div class="flex flex-col items-center">
+          <div class="text-2xl font-bold">10k+</div>
+          <div>Active Learners</div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="text-2xl font-bold">500+</div>
+          <div>Projects Available</div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="text-2xl font-bold">50+</div>
+          <div>Technologies</div>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="text-2xl font-bold">4.5/5</div>
+          <div>Learner Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 theme-transition reveal-up" style="background: var(--bg-tertiary);">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <!-- Company Info -->
+        <div class="md:col-span-2">
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg mr-3 flex items-center justify-center">
+              <span class="text-white font-bold text-sm">HM</span>
+            </div>
+            <h3 class="text-2xl font-bold gradient-text">Hands On Master</h3>
+          </div>
+          <p class="mb-4" style="color: var(--text-secondary);">
+            Empowering learners worldwide through hands-on project-based coding education and AI-powered learning assistance.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 glassmorphism rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 glassmorphism rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 glassmorphism rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2" style="color: var(--text-secondary);">
+            <li><a href="#features" class="hover:text-purple-400 transition-colors duration-300">Features</a></li>
+            <li><a href="#how-it-works" class="hover:text-purple-400 transition-colors duration-300">How it Works</a></li>
+            <li><a href="{{ url_for('login') }}" class="hover:text-purple-400 transition-colors duration-300">Get Started</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h4 class="font-semibold mb-4">Support</h4>
+          <ul class="space-y-2" style="color: var(--text-secondary);">
+            <li><a href="#" class="hover:text-purple-400 transition-colors duration-300">Help Center</a></li>
+            <li><a href="#" class="hover:text-purple-400 transition-colors duration-300">Contact Us</a></li>
+            <li><a href="#" class="hover:text-purple-400 transition-colors duration-300">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-purple-400 transition-colors duration-300">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="border-t border-white/10 pt-8 text-center" style="color: var(--text-secondary);">
+        <p>&copy; 2025 Hands On Master. All rights reserved. Made with ❤️ for developers worldwide.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const html = document.documentElement;
+    const body = document.body;
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      if (theme === 'light') {
+        body.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)';
+        body.style.color = '#1e293b';
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        body.style.background = 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)';
+        body.style.color = '#ffffff';
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
+
+    // Initialize theme
+    applyTheme(localStorage.getItem('theme') || 'dark');
+
+    themeToggle.addEventListener('click', () => {
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', newTheme);
+      applyTheme(newTheme);
+    });
+
+    // Mobile menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuOpen.classList.toggle('hidden');
+      menuClose.classList.toggle('hidden');
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          mobileMenu.classList.add('hidden');
+          menuOpen.classList.remove('hidden');
+          menuClose.classList.add('hidden');
+        }
+      });
+    });
+
+    // Reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-up').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Navigation highlight
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      let current = '';
+      sections.forEach(section => {
+        if (scrollY >= section.offsetTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.toggle('text-purple-400', link.getAttribute('href') === '#' + current);
+      });
+    });
+
+    // Testimonials Carousel - Auto Scroll Only
+    const carousel = document.getElementById('testimonials-carousel');
+    let currentSlide = 0;
+    let autoScrollInterval;
+
+    function getSlidesPerView() {
+      return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+    }
+
+    function updateCarousel() {
+      const slideWidth = 100 / getSlidesPerView();
+      carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+    }
+
+    function nextSlide() {
+      const totalSlides = Math.ceil(8 / getSlidesPerView());
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function startAutoScroll() {
+      autoScrollInterval = setInterval(nextSlide, 2000); // Auto scroll every 2 seconds
+    }
+
+    function stopAutoScroll() {
+      clearInterval(autoScrollInterval);
+    }
+
+    // Pause on hover, resume on mouse leave
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', startAutoScroll);
+
+    // Touch support - pause on touch
+    carousel.addEventListener('touchstart', stopAutoScroll);
+    carousel.addEventListener('touchend', () => {
+      setTimeout(startAutoScroll, 3000); // Resume after 3 seconds
+    });
+
+    // Initialize auto scroll
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
+    startAutoScroll();
+
+    // Simple Working Typing Animation
+    function typeWriter(elementId, text, speed = 100, startDelay = 0) {
+      const element = document.getElementById(elementId);
+      element.innerHTML = '';
+      let i = 0;
+      
+      setTimeout(() => {
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+        type();
+      }, startDelay);
+    }
+
+    // Start typing when page loads
+    window.addEventListener('load', () => {
+      typeWriter('typing-line1', 'Learn by Doing', 120, 500);
+      typeWriter('typing-line2', 'with Hands On Master', 100, 2500);
+    });
+  </script>
+
+</body>
+</html>
