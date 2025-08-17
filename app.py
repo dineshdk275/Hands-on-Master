@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, send_from_directory
 import datetime
 
 app = Flask(__name__)
@@ -76,6 +77,10 @@ def register():
 def dashboard():
     print("Dashboard route accessed!")  # Debug
     return render_template('dashboard.html')
+
+@app.route('/About.html')
+def about():
+    return send_from_directory('templates', 'About.html')
 
 @app.route('/test')
 def test():
