@@ -6,6 +6,11 @@
   <title>Hands On Master</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    function nextSlide() {
+      const totalSlides = getSlidesCount();
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
     tailwind.config = {
       theme: {
         extend: {
@@ -78,6 +83,15 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
     }
 
+  [data-theme="light"] .card-hover:hover {
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.25), 0 2px 8px rgba(139,92,246,0.10), 0 0 24px #8b5cf6cc;
+    border: 2px solid #8b5cf6 !important;
+    background: rgba(139, 92, 246, 0.08) !important;
+    transform: scale(1.08) translateY(-8px);
+    z-index: 2;
+    animation: pulse-glow 1.5s;
+  }
+
     [data-theme="light"] .floating-bg {
       background: rgba(139, 92, 246, 0.25) !important;
       border: 2px solid rgba(139, 92, 246, 0.4) !important;
@@ -107,6 +121,16 @@
       background: rgba(255, 255, 255, 0.15);
       transform: translateY(-5px);
     }
+
+  /* Feature card hover effect */
+  .card-hover:hover {
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.25), 0 2px 8px rgba(0,0,0,0.10), 0 0 20px #8b5cf655;
+    border: 2px solid #8b5cf6;
+    transform: scale(1.07) translateY(-8px);
+    z-index: 2;
+    animation: pulse-glow 1.5s;
+  }
+  }
 
     [data-theme="light"] .glassmorphism:hover {
       background: rgba(255, 255, 255, 0.9) !important;
@@ -213,10 +237,28 @@
     }
 
     .testimonial-card {
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+  width: 100%;
+  max-width: 370px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 auto;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s, transform 0.3s;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(139,92,246,0.10);
+  overflow: hidden;
+    }
+
+    .testimonial-card:hover {
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+  border: 2px solid #8b5cf6;
+  transform: scale(1.03) translateY(-2px);
+  background: rgba(139, 92, 246, 0.08);
+  z-index: 2;
+    }
     }
 
     @media (max-width: 768px) {
@@ -463,23 +505,8 @@
     
     <!-- Auto-scrolling Testimonials Carousel -->
     <div class="max-w-7xl mx-auto overflow-hidden relative">
-      <div id="testimonials-carousel" class="flex transition-transform duration-1000 ease-in-out">
-        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
-          <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold mr-4">R</div>
-              <div>
-                <h4 class="font-bold">Riya M.</h4>
-                <p class="text-sm" style="color: var(--text-secondary);">Computer Science Student</p>
-              </div>
-            </div>
-            <p style="color: var(--text-secondary);" class="mb-4">"Finally, a platform that lets me learn by actually building things! The projects are engaging and the AI feedback helped me understand concepts I struggled with in class."</p>
-            <div class="flex text-yellow-400">⭐⭐⭐⭐⭐</div>
-          </div>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="min-w-full md:min-w-[50%] lg:min-w-[33.33%] px-4">
+      <div id="testimonials-carousel" class="flex items-stretch transition-transform duration-1000 ease-in-out">
+  <div class="testimonial-slide px-4" style="min-width: 33.33%;">
           <div class="glassmorphism rounded-2xl p-8 card-hover testimonial-card h-full">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold mr-4">Y</div>
@@ -784,20 +811,24 @@
     let currentSlide = 0;
     let autoScrollInterval;
 
-    function getSlidesPerView() {
-      return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+
+    function getSlidesCount() {
+      return carousel.children.length;
     }
 
     function updateCarousel() {
-      const slideWidth = 100 / getSlidesPerView();
-      carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+      const cardsPerView = 3;
+      const slideWidthPercent = 100 / cardsPerView;
+      carousel.style.transform = `translateX(-${currentSlide * slideWidthPercent}%)`;
     }
 
-    function nextSlide() {
-      const totalSlides = Math.ceil(8 / getSlidesPerView());
-      currentSlide = (currentSlide + 1) % totalSlides;
+
+    function prevSlide() {
+      const totalSlides = getSlidesCount();
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
       updateCarousel();
     }
+
 
     function startAutoScroll() {
       autoScrollInterval = setInterval(nextSlide, 2000); // Auto scroll every 2 seconds
