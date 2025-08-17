@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hands On Master - About & Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                        'float': 'float 4s ease-in-out infinite',
+                        'rotate-slow': 'rotateSlow 20s linear infinite',
+                        'gradient-x': 'gradientX 3s ease infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        rotateSlow: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        gradientX: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                    },
+                    backgroundImage: {
+                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom focus styles for form inputs */
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+            border-color: #6366F1;
+        }
+
+.features {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 900px;
+}
+
+.feature-box {
+  background: linear-gradient(135deg, #ffffff, #f8faff);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.feature-box h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #4e8ef7, #7a5cf5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.feature-box p {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.feature-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-box ul li {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 4px 0;
+}
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-pink-50 dark:from-gray-900 dark:via-blue-900 dark:to-indigo-900 text-gray-800 dark:text-white min-h-screen font-sans">
+    <!-- Enhanced Background Pattern -->
+    <div class="fixed inset-0 opacity-[0.15] dark:opacity-[0.05] z-0">
+        <div class="absolute inset-0 bg-gradient-conic from-blue-400 via-purple-400 to-cyan-400 animate-rotate-slow"></div>
+    </div>
+     <!-- Light Mode Additional Background Elements -->
+    <div class="fixed inset-0 pointer-events-none opacity-30 dark:opacity-0 z-0">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-blue-200/40 to-transparent rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-20 right-0 w-80 h-80 bg-gradient-radial from-purple-200/40 to-transparent rounded-full blur-3xl animate-float" style="animation-delay: 1.5s;"></div>
+        <div class="absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-radial from-pink-200/40 to-transparent rounded-full blur-3xl animate-float" style="animation-delay: 0.5s;"></div>
+    </div>
+
+    <div class="flex relative z-10">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-16 hover:w-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl h-screen transition-all duration-300 ease-in-out overflow-hidden group border-r border-gray-200/50 dark:border-gray-700/50 shadow-2xl sticky top-0">
+            <!-- Logo/Brand Section -->
+            <div class="p-3 border-b border-gray-100/50 dark:border-gray-700/50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-indigo-500 via-blue-500 to-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg">
+                        <span class="text-white text-lg font-bold">H</span>
+                    </div>
+                    <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-bold text-gray-800 dark:text-white whitespace-nowrap overflow-hidden">
+                        <span class="bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text text-transparent">Hands On Master</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 py-4 px-2">
+                <div class="space-y-2">
+                    <a href="#about" class="flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50/70 hover:to-cyan-50/70 dark:hover:from-blue-900/20 dark:hover:to-cyan-900/20 text-gray-700 dark:text-gray-300 whitespace-nowrap group/item hover:scale-105 hover:shadow-lg">
+                        <span class="text-lg flex-shrink-0">ℹ️</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium">About Us</span>
+                    </a>
+                    <a href="#contact" class="flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50/70 hover:to-cyan-50/70 dark:hover:from-blue-900/20 dark:hover:to-cyan-900/20 text-gray-700 dark:text-gray-300 whitespace-nowrap group/item hover:scale-105 hover:shadow-lg">
+                        <span class="text-lg flex-shrink-0">✉️</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium">Contact</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- Theme Toggle -->
+            <div class="absolute bottom-5 left-0 w-full p-3">
+                 <button id="themeToggle" class="w-10 h-10 hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-300 flex items-center justify-center group/btn flex-shrink-0 hover:scale-110 hover:shadow-lg">
+                    <span class="text-lg">🌓</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 md:p-10 space-y-10">
+            <!-- About Section -->
+            <section id="about" class="relative overflow-hidden bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-8 rounded-2xl shadow-2xl animate-fade-in border border-white/20 dark:border-gray-700/20">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-left animate-slide-up">
+                        <h1 class="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent drop-shadow-sm">
+                            Empower Your Coding Journey
+                        </h1>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                           Master programming the right way. Our interactive platform helps you build strong foundations before leveling up — no shortcuts, just smarter, more personal learning.
+                        </p>
+                    </div>
+                   <section class="features">
+  <div class="features-grid">
+    <div class="feature-box">
+      <div class="icon">📚</div>
+      <h3>Stepwise Learning</h3>
+      <p>Pick a language and grow step by step with brief and detailed concepts.</p>
+      <ul>
+        <li>Pick a language</li>
+        <li>Brief & detailed concepts</li>
+        <li>Curated resources</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <div class="icon">🎮</div>
+      <h3>Make Learning Fun</h3>
+      <p>Interactive projects, quizzes, and community-driven gamification.</p>
+      <ul>
+        <li>Mini-projects, quizzes, gamification</li>
+        <li>Community, leaderboard, AI help</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <div class="icon">✨</div>
+      <h3>Extra Perks</h3>
+      <p>Tools and features to keep you motivated and connected.</p>
+      <ul>
+        <li>Streaks, progress tracker, tag system</li>
+        <li>Offline mode, collab room, voice nav</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <div class="icon">🚀</div>
+      <h3>Built for Impact</h3>
+      <p>Powered by modern technologies and a dedicated team.</p>
+      <ul>
+        <li>Modern tech: React, Node.js, PostgreSQL/Firebase</li>
+        <li>Dedicated team, real results</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="relative overflow-hidden bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl p-8 rounded-2xl shadow-2xl animate-fade-in border border-white/20 dark:border-gray-700/20" style="animation-delay: 0.3s;">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-black mb-4 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent drop-shadow-sm">Contact the Team</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-10">
+                        Reach out for feedback, suggestions, bug reports (earn rewards!), collaboration, or questions. We love connecting with learners & partners!
+                    </p>
+
+                    <form id="contact-form" class="space-y-6">
+                        <input type="text" placeholder="Your Name" required class="form-input w-full bg-white/50 dark:bg-gray-900/50 border-2 border-gray-300/50 dark:border-gray-700/50 rounded-md py-3 px-4 text-gray-800 dark:text-white transition duration-300 backdrop-blur-sm">
+                        <input type="email" placeholder="Your Email" required class="form-input w-full bg-white/50 dark:bg-gray-900/50 border-2 border-gray-300/50 dark:border-gray-700/50 rounded-md py-3 px-4 text-gray-800 dark:text-white transition duration-300 backdrop-blur-sm">
+                        <textarea placeholder="Your Message" rows="5" required class="form-input w-full bg-white/50 dark:bg-gray-900/50 border-2 border-gray-300/50 dark:border-gray-700/50 rounded-md py-3 px-4 text-gray-800 dark:text-white transition duration-300 backdrop-blur-sm"></textarea>
+                        <button type="submit" class="w-full bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-semibold py-3 px-6 rounded-md hover:from-indigo-600 hover:to-blue-600 transition duration-300 shadow-lg hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                    
+                    <div id="success-message" class="hidden mt-6 p-4 bg-green-500/20 text-green-700 dark:text-green-300 border border-green-500/30 rounded-md">
+                        Thank you for your message! We'll get back to you soon.
+                    </div>
+
+                    <div class="mt-12">
+                        <p class="text-gray-500 dark:text-gray-400 mb-4">Connect with us</p>
+                        <div class="flex justify-center space-x-6">
+                            <a href="#" class="text-gray-400 hover:text-indigo-500 dark:hover:text-indigo-400 transition duration-300 hover:scale-110">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-500 dark:hover:text-indigo-400 transition duration-300 hover:scale-110">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Footer -->
+            <footer class="text-center text-gray-500 dark:text-gray-400 text-sm py-6">
+                 &copy; 2025 Hands-on-master. All Rights Reserved.
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // --- Theme toggle ---
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // --- Smooth Scrolling for Navigation Links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // --- Contact Form Submission ---
+        const form = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            
+            // Here you would typically send the form data to a server.
+            // For this example, we'll just show a success message.
+            
+            // We won't hide the form, just show the message above it.
+            successMessage.style.display = 'block';
+            form.reset(); // Clear the form fields
+        });
+    </script>
+</body>
+</html>
