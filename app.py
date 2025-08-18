@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 import datetime
 
@@ -76,6 +77,12 @@ def register():
 def dashboard():
     print("Dashboard route accessed!")  # Debug
     return render_template('dashboard.html')
+
+
+@app.route('/who-we-are')
+def who_we_are():
+    return render_template('who_we_are.html')
+
 
 @app.route('/test')
 def test():
