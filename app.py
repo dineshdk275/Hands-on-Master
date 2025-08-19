@@ -83,5 +83,10 @@ def dashboard():
 def test():
     return "Test route working! Dashboard should work too."
 
+@app.route('/who-we-are')
+def who_we_are():
+    return render_template('who_we_are.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

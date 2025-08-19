@@ -1,28 +1,106 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who We Are - Hands On Master</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who We Are - Hands On Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/who-we-are">Who We Are</a>
-    </nav>
-    <main style="max-width: 800px; margin: 40px auto; padding: 24px; background: #f8fafc; border-radius: 16px; box-shadow: 0 4px 24px rgba(139,92,246,0.08);">
-        <h1 style="font-size:2.5rem; color:#8b5cf6; margin-bottom:1rem;">Who We Are</h1>
-        <p style="font-size:1.2rem; color:#333;">Hands On Master is a passionate team of educators, developers, and AI enthusiasts dedicated to transforming learning through hands-on coding projects. Our mission is to empower learners to build real-world skills by creating, experimenting, and mastering technology in a supportive, innovative environment.</p>
-        <hr style="margin:2rem 0;">
-        <h2 style="color:#8b5cf6;">Our Vision</h2>
-        <p>We believe in learning by doing. Our platform is designed to help you move beyond theory and tutorials, giving you the tools and feedback to build, learn, and succeed.</p>
-        <h2 style="color:#8b5cf6;">Meet the Team</h2>
-        <ul style="list-style:none; padding:0;">
-            <li><strong>Dinesh DK</strong> – Founder & Lead Developer</li>
-            <li><strong>AI Mentor</strong> – Your 24/7 coding buddy</li>
-            <li><strong>Community</strong> – Learners and mentors worldwide</li>
-        </ul>
-    </main>
+<body class="bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 text-gray-900 min-h-screen">
+  <!-- Hero Section -->
+  <section class="relative py-20 px-6 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-600 via-blue-500 to-pink-500 bg-clip-text text-transparent">Who We Are</h1>
+      <p class="text-lg md:text-xl text-gray-700 mb-8">At <span class="font-semibold text-purple-600">Hands On Master</span>, we believe in learning by doing. Our team is dedicated to building smarter solutions, enabling learners to explore technology hands-on, and making education more practical, engaging, and impactful.</p>
+      <div class="flex justify-center gap-4 mb-8">
+        <a href="/" class="px-6 py-2 rounded-lg bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition">Home</a>
+        <a href="#contact" class="px-6 py-2 rounded-lg bg-white text-purple-700 font-semibold shadow hover:bg-purple-100 transition border border-purple-200">Contact</a>
+      </div>
+    </div>
+    <div class="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-purple-300 to-blue-200 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute bottom-0 right-0 w-56 h-56 bg-gradient-to-tr from-pink-200 to-purple-200 rounded-full blur-3xl opacity-30"></div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16 px-6 bg-white/80">
+    <h2 class="text-4xl font-bold text-center text-purple-700 mb-12">Meet Our Team</h2>
+    <div class="flex flex-col items-center max-w-6xl mx-auto">
+      <!-- First row: 3 members evenly spaced -->
+      <div class="flex flex-row justify-center gap-10 mb-16 w-full">
+        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center w-56">
+          <a href="https://www.linkedin.com/in/dinnesh-kumaar/" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.multiavatar.com/Meghana.svg" alt="Meghana" class="w-20 h-20 rounded-full mb-3 border-4 border-purple-200 shadow hover:scale-110 transition-transform duration-300 bg-white">
+          </a>
+          <h3 class="text-lg font-bold text-purple-700 mt-2">Meghana </h3>
+        </div>
+        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center w-56">
+          <a href="https://www.linkedin.com/in/dinnesh-kumaar/" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.multiavatar.com/Haarthi.svg" alt="Haarthi" class="w-20 h-20 rounded-full mb-3 border-4 border-purple-200 shadow hover:scale-110 transition-transform duration-300 bg-white">
+          </a>
+          <h3 class="text-lg font-bold text-purple-700 mt-2">Haarthi</h3>
+        </div>
+        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center w-56">
+          <a href="https://www.linkedin.com/in/dinnesh-kumaar/" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.multiavatar.com/AdityaKarnati.svg" alt="Aditya Karnati" class="w-20 h-20 rounded-full mb-3 border-4 border-purple-200 shadow hover:scale-110 transition-transform duration-300 bg-white">
+          </a>
+          <h3 class="text-lg font-bold text-purple-700 mt-2">Aditya Karnati</h3>
+        </div>
+      </div>
+      <!-- Second row: 2 members centered under gaps of first row -->
+      <div class="flex flex-row justify-center gap-10 w-full mt-2">
+        <div class="flex-1"></div>
+        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center w-56">
+          <a href="https://www.linkedin.com/in/dinnesh-kumaar/" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.multiavatar.com/Rahul.svg" alt="Rahul" class="w-20 h-20 rounded-full mb-3 border-4 border-purple-200 shadow hover:scale-110 transition-transform duration-300 bg-white">
+          </a>
+          <h3 class="text-lg font-bold text-purple-700 mt-2">Rahul</h3>
+        </div>
+        <div class="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition flex flex-col items-center w-56">
+          <a href="https://www.linkedin.com/in/dinnesh-kumaar/" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.multiavatar.com/DinneshKumaar.svg" alt="Dinnesh Kumaar" class="w-20 h-20 rounded-full mb-3 border-4 border-purple-200 shadow hover:scale-110 transition-transform duration-300 bg-white">
+          </a>
+          <h3 class="text-lg font-bold text-purple-700 mt-2">Dinnesh Kumaar</h3>
+        </div>
+        <div class="flex-1"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 px-6 bg-gradient-to-br from-purple-50 to-blue-50">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-purple-700">Get in Touch</h2>
+      <p class="text-gray-600 mb-10">Have feedback, suggestions, or facing any issues? Share your thoughts below — we’d love to hear from you!</p>
+      <form action="/submit_feedback" method="POST" class="bg-white/90 shadow-xl rounded-2xl p-8">
+        <div class="mb-5 text-left">
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+          <input type="text" id="name" name="name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none">
+        </div>
+        <div class="mb-5 text-left">
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+          <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none">
+        </div>
+        <div class="mb-5 text-left">
+          <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message / Feedback</label>
+          <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none"></textarea>
+        </div>
+        <div class="mb-5 text-left">
+          <label for="type" class="block text-sm font-medium text-gray-700 mb-2">I’m reaching out for</label>
+          <select id="type" name="type" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none">
+            <option value="feedback">Feedback / Testimonial</option>
+            <option value="suggestion">Suggestion</option>
+            <option value="issue">Report an Issue</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-3 bg-purple-600 text-white font-semibold rounded-lg shadow hover:bg-purple-700 transition">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 text-sm py-8 bg-white/80 mt-10">
+    &copy; 2025 Hands On Master. All Rights Reserved.
+  </footer>
 </body>
 </html>
