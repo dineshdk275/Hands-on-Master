@@ -4,6 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Get Started</title>
+    <script>
+        // Early theme bootstrap for login page
+        (function () {
+            try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                const root = document.documentElement;
+                root.setAttribute('data-theme', theme);
+                if (theme === 'light') {
+                    root.classList.remove('dark');
+                    document.documentElement.style.colorScheme = 'light';
+                } else {
+                    root.classList.add('dark');
+                    document.documentElement.style.colorScheme = 'dark';
+                }
+            } catch (_) {}
+        })();
+    </script>
     <style>
         :root {
             --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
@@ -281,7 +298,7 @@
         // Set initial mode from Flask template
         const initialMode = '{{ mode or "register" }}';
         
-        // Theme logic (sync with landing page)
+        // Theme logic (sync with landing/remember across pages)
         const html = document.documentElement;
         const body = document.body;
         function applyTheme(theme) {
